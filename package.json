@@ -1,0 +1,24 @@
+{
+  "name": "red-contrib-xstate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha \"test/**/*_spec.js\""
+  },
+  "author": "Rainer Wittmann",
+  "license": "ISC",
+  "node-red": {
+    "nodes": {
+      "xstate-interpreter": "xstate-interpreter.js"
+    }
+  },
+  "dependencies": {
+    "xstate": "^4.6.7"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0",
+    "node-red": "^0.20.8",
+    "node-red-node-test-helper": "^0.2.3"
+  }
+}
