@@ -1,0 +1,55 @@
+<script type="text/javascript">
+
+    var  machineDefinition = {
+            id: 'toggle',
+            initial: 'inactive',
+            states: {
+              inactive: { on: { TOGGLE: 'active' } },
+              active: { on: { TOGGLE: 'inactive' } }
+            }
+          }
+
+    RED.nodes.registerType('xstate-interpreter',{
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            machineDefinition: { value: JSON.stringify(machineDefinition), validate: RED.validators.typedInput("json") }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name||"xstate-interpreter";
+        },
+        oneditprepare: function() {
+            // create definiton input field
+            let definitionInput = $("#node-input-machineDefinition")
+            console.log('definitionInput', definitionInput)
+            definitionInput.typedInput({
+                        default: 'json',
+                        types: ['json'],
+                        typeField: $("#node-input-machineDefinition")
+                    });
+            definitionInput.typedInput( 'value', this.machineDefinition );
+	},
+	oneditsave: function() {
+		return;
+	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="xstate-interpreter">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-machineDefinition"><i class="icon-tag"></i> MachineDefinition</label>
+        <input type="text" id="node-input-machineDefinition" placeholder="machineDefinition">
+        </div>
+</script>
+
+<script type="text/x-red" data-help-name="xstate-interpreter">
+    <p>A simple node that interprets an XState statemachine definition</p>
+</script>
